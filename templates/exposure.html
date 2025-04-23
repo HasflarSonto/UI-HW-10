@@ -3,19 +3,19 @@
 {% block content %}
 <div class="lesson-container text-center">
     <div class="lesson-text">
-        Adjust the exposure slider to match the output photo on the left
+        Adjust the exposure slider to see how the photo varies from the original.
     </div>
 
     <div class="exposure-exercise mt-5">
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <div class="target-image">
-                    <img src="{{ url_for('static', filename='images/sunflower_target.jpg') }}" alt="Target exposure" class="img-fluid">
+                    <img src="{{ url_for('static', filename='images/exposure.jpg') }}" alt="Target exposure" class="img-fluid">
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="adjustable-image">
-                    <img src="{{ url_for('static', filename='images/sunflower.jpg') }}" alt="Adjustable exposure" class="img-fluid" id="adjustableImage">
+                    <img src="{{ url_for('static', filename='images/exposure.jpg') }}" alt="Adjustable exposure" class="img-fluid" id="adjustableImage">
                 </div>
             </div>
         </div>

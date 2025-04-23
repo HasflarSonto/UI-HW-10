@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="lesson-container text-center">
+<div class="lesson-container text-center" data-question-number="{{ question_number }}">
     <div class="quiz-question mb-5">
         Does this photo follow the rule of thirds?
     </div>
@@ -26,9 +26,12 @@
 {% block scripts %}
 <script>
 $(document).ready(function() {
+    // Retrieve question number from data attribute
+    const questionNumber = $('.lesson-container').data('question-number');
+
     // Load quiz question
     $.getJSON('/static/data/quiz.json', function(data) {
-        const question = data.questions.find(q => q.number === {{ question_number }});
+        const question = data.questions.find(q => q.number === questionNumber);
         if (question) {
             $('#questionImage').attr('src', question.image);
         }
@@ -39,10 +42,21 @@ $(document).ready(function() {
         const selectedAnswer = $(this).data('answer');
         $('.btn-answer').prop('disabled', true);
         
-        // Store answer
-        $.post('/api/progress', {
-            question_number: {{ question_number }},
-            answer: selectedAnswer
+        // Store answer via JSON POST
+        $.ajax({
+            type: 'POST',
+            url: '/api/progress',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                question_number: questionNumber,
+                answer: selectedAnswer
+            }),
+            success: function(response) {
+                console.log('Answer saved:', response);
+            },
+            error: function(err) {
+                console.error('Error saving answer:', err);
+            }
         });
 
         // Show correct/incorrect feedback
@@ -58,7 +72,7 @@ $(document).ready(function() {
 
     // Next question button
     $('#next-question').click(function() {
-        const nextQuestion = {{ question_number }} + 1;
+        const nextQuestion = questionNumber + 1;
         if (nextQuestion <= 5) { // Assuming 5 questions total
             window.location.href = `/quiz/${nextQuestion}`;
         } else {

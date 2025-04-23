@@ -1,18 +1,10 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///photography.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
 
-# Database Models
-class UserProgress(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-    lesson_number = db.Column(db.Integer)
-    quiz_answers = db.Column(db.String(500))  # Store as JSON string
+# Simple list to store quiz answers
+quiz_answers = []
 
 # Routes
 @app.route('/')
@@ -33,6 +25,8 @@ def learn(lesson_number):
 
 @app.route('/quiz-intro')
 def quiz_intro():
+    # Clear previous answers when starting a new quiz
+    quiz_answers.clear()
     return render_template('quiz_intro.html')
 
 @app.route('/quiz/<int:question_number>')
@@ -47,18 +41,26 @@ def results():
     return render_template('results.html')
 
 # API Routes
-@app.route('/api/progress', methods=['POST'])
+@app.route('/api/progress', methods=['GET', 'POST'])
 def track_progress():
-    data = request.json
-    progress = UserProgress(
-        lesson_number=data.get('lesson_number'),
-        quiz_answers=data.get('quiz_answers', '{}')
-    )
-    db.session.add(progress)
-    db.session.commit()
-    return jsonify({'status': 'success'})
+    if request.method == 'POST':
+        data = request.json
+        question_number = data.get('question_number')
+        answer = data.get('answer')
+        
+        # Get the correct answer from quiz.json
+        with open('static/data/quiz.json', 'r') as f:
+            import json
+            quiz_data = json.load(f)
+            correct_answer = next(q['correctAnswer'] for q in quiz_data['questions'] if q['number'] == question_number)
+            
+            # Store 1 for correct answer, 0 for incorrect
+            quiz_answers.append(1 if answer == correct_answer else 0)
+            
+        return jsonify({'status': 'success'})
+    else:
+        # GET request to retrieve all progress
+        return jsonify(quiz_answers)
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(debug=True) 
