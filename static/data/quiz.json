@@ -16,7 +16,6 @@
             "number": 3,
             "type": "mcq",
             "question": "What effect does increasing the exposure have on a photo?",
-            "image": "/static/images/quiz/saturation.jpg",
             "options": [
                 "It decreases the color saturation",
                 "It makes the photo appear darker",
