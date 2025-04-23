@@ -2,33 +2,78 @@
     "questions": [
         {
             "number": 1,
-            "image": "/static/images/quiz/dark_knight.jpg",
+            "image": "/static/images/quiz/landscape.jpg",
             "correctAnswer": "yes",
-            "explanation": "The subject (Batman) is positioned along the right third of the image, creating a dynamic composition."
+            "explanation": "The main subject is centered, not following the rule of thirds."
         },
         {
             "number": 2,
             "image": "/static/images/quiz/climber.jpg",
-            "correctAnswer": "yes",
+            "correctAnswer": "no",
             "explanation": "The climber is positioned at the intersection of the upper and right third lines."
         },
         {
             "number": 3,
-            "image": "/static/images/quiz/landscape.jpg",
-            "correctAnswer": "no",
-            "explanation": "The main subject is centered, not following the rule of thirds."
-        },
-        {
+            "type": "mcq",
+            "question": "What effect does increasing the exposure have on a photo?",
+            "image": "/static/images/quiz/saturation.jpg",
+            "options": [
+                "It decreases the color saturation",
+                "It makes the photo appear darker",
+                "It increases the overall brightness of the image",
+                "It sharpens the image edges"
+            ],
+            "correctAnswer": "c"
+       },
+       {
             "number": 4,
-            "image": "/static/images/quiz/portrait.jpg",
-            "correctAnswer": "yes",
-            "explanation": "The person's eyes are positioned along the upper third line."
+            "type": "mcq",
+            "question": "Adjusting the hue of an image will primarily",
+            "options": [
+                "Sharpen the image details",
+                "Alter the color tones in the image",
+                "Increase contrast",
+                "Remove grain from the image"
+            ],
+            "correctAnswer": "b"
         },
         {
             "number": 5,
-            "image": "/static/images/quiz/building.jpg",
-            "correctAnswer": "no",
-            "explanation": "The building is centered in the frame rather than positioned along the thirds."
+            "type": "mcq",
+            "question": "If an image appears too red, how could you adjust the hue to correct it?",
+            "options": [
+                "Shift hue toward blue",
+                "Shift hue toward green",
+                "Shift hue toward yellow",
+                "Shift hue toward cyan"
+            ],
+            "correctAnswer": "b"
+        },
+        {
+            "number": 6,
+            "type": "mcq",
+            "question": "What does increasing saturation in a photo do?",
+            "options": [
+             "Makes the image brigher",
+             "Enchances the sharpness of edges",
+             "Makes colors appear more vivid and intense",
+             "Coverts the image to black and white"
+            ],
+            "correctAnswer": "c"
+        },
+        {
+            "number": 7,
+            "type": "mcq",
+            "question": "What happens when you reduce saturation to zero?",
+            "options": [
+             "The photo becomes completely black",
+             "The photo loses all color and becomes grayscale",
+             "The brightness increases",
+             "The image becomes sharper"
+            ],
+            "correctAnswer": "b"
         }
+        
+    
     ]
 } 

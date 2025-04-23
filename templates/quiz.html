@@ -2,17 +2,22 @@
 
 {% block content %}
 <div class="lesson-container text-center" data-question-number="{{ question_number }}">
-    <div class="quiz-question mb-5">
-        Does this photo follow the rule of thirds?
+    <div class="quiz-question mb-5" id="questionText">
+        <!-- Question text will be loaded dynamically -->
     </div>
 
     <div class="quiz-image mb-5">
         <img src="" alt="Quiz image" id="questionImage" class="img-fluid">
+        <div class="mt-3">
+            <input type="file" id="imageUpload" class="form-control" accept="image/*" style="display: none;">
+            <label for="imageUpload" class="btn btn-outline-primary">Upload Your Photo</label>
+        </div>
     </div>
 
     <div class="quiz-options">
-        <button class="btn btn-answer btn-no" data-answer="no">NO</button>
-        <button class="btn btn-answer btn-yes" data-answer="yes">YES</button>
+        <div class="row justify-content-center" id="optionsContainer">
+            <!-- Options will be loaded dynamically -->
+        </div>
     </div>
 
     <div class="mt-4 text-end">
@@ -33,12 +38,65 @@ $(document).ready(function() {
     $.getJSON('/static/data/quiz.json', function(data) {
         const question = data.questions.find(q => q.number === questionNumber);
         if (question) {
-            $('#questionImage').attr('src', question.image);
+            $('#questionText').text(question.question || 'Does this photo follow the rule of thirds?');
+            
+            if (question.image) {
+                $('#questionImage').attr('src', question.image);
+                $('#imageUpload').parent().hide(); // Hide upload if question provides image
+            } else {
+                $('#imageUpload').parent().show(); // Show upload if no image provided
+            }
+
+            // Create options based on question type
+            const optionsContainer = $('#optionsContainer');
+            optionsContainer.empty();
+
+            if (question.type === 'mcq') {
+                // Create 4 options for MCQ
+                const col1 = $('<div class="col-md-6"></div>');
+                const col2 = $('<div class="col-md-6"></div>');
+
+                question.options.forEach((option, index) => {
+                    const letter = String.fromCharCode(97 + index); // Convert 0,1,2,3 to a,b,c,d
+                    const button = $(`
+                        <button class="btn btn-answer w-100 mb-3" data-answer="${letter}">
+                            <span class="answer-letter">${letter.toUpperCase()}.</span>
+                            <span class="answer-text">${option}</span>
+                        </button>
+                    `);
+                    if (index < 2) {
+                        col1.append(button);
+                    } else {
+                        col2.append(button);
+                    }
+                });
+
+                optionsContainer.append(col1, col2);
+            } else {
+                // Create Yes/No buttons
+                const col = $('<div class="col-md-6"></div>');
+                col.append(`
+                    <button class="btn btn-answer btn-no w-100 mb-3" data-answer="no">NO</button>
+                    <button class="btn btn-answer btn-yes w-100 mb-3" data-answer="yes">YES</button>
+                `);
+                optionsContainer.append(col);
+            }
+        }
+    });
+
+    // Handle image upload
+    $('#imageUpload').change(function(e) {
+        if (e.target.files && e.target.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                $('#questionImage').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(e.target.files[0]);
         }
     });
 
     // Handle answer selection
-    $('.btn-answer').click(function() {
+    $(document).on('click', '.btn-answer', function() {
         const selectedAnswer = $(this).data('answer');
         $('.btn-answer').prop('disabled', true);
         
@@ -59,12 +117,11 @@ $(document).ready(function() {
             }
         });
 
-        // Show correct/incorrect feedback
-        if (selectedAnswer === 'yes') {
-            $(this).addClass('btn-yes-selected');
-        } else {
-            $(this).addClass('btn-no-selected');
-        }
+        // Show selected answer feedback
+        $('.btn-answer').removeClass('btn-yes-selected btn-no-selected btn-selected');
+        $(this).addClass(selectedAnswer === 'yes' ? 'btn-yes-selected' : 
+                        selectedAnswer === 'no' ? 'btn-no-selected' : 
+                        'btn-selected');
 
         // Show next button
         $('#next-question').show();
@@ -73,7 +130,7 @@ $(document).ready(function() {
     // Next question button
     $('#next-question').click(function() {
         const nextQuestion = questionNumber + 1;
-        if (nextQuestion <= 5) { // Assuming 5 questions total
+        if (nextQuestion <= 7) { 
             window.location.href = "{{ url_for('quiz', question_number=1) }}".replace('1', nextQuestion);
         } else {
             window.location.href = "{{ url_for('results') }}";

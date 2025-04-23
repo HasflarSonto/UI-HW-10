@@ -45,7 +45,7 @@ def quiz_intro():
 @app.route('/quiz/<int:question_number>')
 def quiz(question_number):
     # If we've completed all questions, redirect to results
-    if question_number > 5:  # Assuming 5 questions total
+    if question_number > 7:  # Assuming 5 questions total
         return redirect(url_for('results'))
     return render_template('quiz.html', question_number=question_number)
 
