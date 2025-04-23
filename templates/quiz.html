@@ -6,7 +6,7 @@
         <!-- Question text will be loaded dynamically -->
     </div>
 
-    <div class="quiz-image mb-5">
+    <div class="quiz-image mb-5" id="imageSection" style="display: none;">
         <img src="" alt="Quiz image" id="questionImage" class="img-fluid">
         <div class="mt-3">
             <input type="file" id="imageUpload" class="form-control" accept="image/*" style="display: none;">
@@ -40,11 +40,13 @@ $(document).ready(function() {
         if (question) {
             $('#questionText').text(question.question || 'Does this photo follow the rule of thirds?');
             
+            // Show/hide image section based on whether image is provided
             if (question.image) {
                 $('#questionImage').attr('src', question.image);
-                $('#imageUpload').parent().hide(); // Hide upload if question provides image
+                $('#imageUpload').parent().hide(); // Hide upload button
+                $('#imageSection').show(); // Show the image section
             } else {
-                $('#imageUpload').parent().show(); // Show upload if no image provided
+                $('#imageSection').hide(); // Hide the entire image section
             }
 
             // Create options based on question type
