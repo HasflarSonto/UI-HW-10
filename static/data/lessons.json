@@ -3,30 +3,66 @@
         {
             "number": 1,
             "title": "Rule of Thirds",
-            "content": "The rule of thirds is a simple way to improve photo composition. Imagine breaking your image into 9 equal parts using two horizontal and two vertical lines. Placing your subject along these lines or at their intersections makes the photo more balanced and visually appealing.",
-            "image": "/static/images/rule_of_thirds_grid.jpg",
+            "content": "The rule of thirds is a simple way to improve photo composition. Imagine breaking your image into 9 equal parts using two horizontal and two vertical lines.",
+            "content2": " Placing your subject along these lines or at their intersections makes the photo more balanced and visually appealing.",
+            "image": "/static/images/rule_of_thirds_grid.jpg"
+        },
+
+        {
+            "number": 2,
+            "title": "Rule of Thirds",
+            "content": "Below is a good and bad example for rule of thirds composition.",
+            "content2": "",
             "examples": {
                 "good": "/static/images/rule_of_thirds_good.jpg",
                 "bad": "/static/images/rule_of_thirds_bad.jpg"
             }
-        },
-        {
-            "number": 2,
-            "title": "Exposure",
-            "content": "Exposure determines how light or dark your image appears. It is controlled by three main settings: aperture, shutter speed, and ISO.",
-            "image": "/static/images/exposure.jpg"
+
         },
         {
             "number": 3,
-            "title": "Hue",
-            "content": "Hue refers to the pure spectrum colors commonly referred to by color names - red, orange, yellow, blue, green violet - which appear in the hue circle or rainbow.",
-            "image": "/static/images/hue.jpg"
+            "content": "Changing the exposure level changes how bright or dark your photo is.",
+            "content2": "Getting the right exposure means your photo isn’t too dark (underexposed) or too bright (overexposed), so details are clear and colors look natural.",
+            "title": "Exposure",
+            "image": "/static/images/exposure.jpg"
         },
         {
             "number": 4,
+            "title": "Exposure",
+            "content": "Exposure determines how light or dark your image appears. It is controlled by three main settings: aperture, shutter speed, and ISO.",
+            "content2": "",
+            "image": "/static/images/exposure.jpg"
+        },
+        {
+            "number": 5,
+            "title": "Hue",
+            "content": "Hue refers to the pure spectrum colors commonly referred to by color names - red, orange, yellow, blue, green violet - which appear in the hue circle or rainbow.",
+            "content2": "",
+            "image": "/static/images/hue.jpg"
+        },
+        {
+            "number": 6,
+            "title": "Hue",
+            "content": "hue slider",
+            "content2": "",
+            "image": "/static/images/hue.jpg"
+        },
+
+        {
+            "number": 7,
             "title": "Saturation",
             "content": "Saturation refers to the intensity or purity of a color. A highly saturated color is vivid, while a less saturated color appears more muted or gray.",
+            "content2": "",
+            "image": "/static/images/saturation.jpg"
+        },
+        {
+            "number": 8,
+            "title": "Saturation",
+            "content": "slider saturation",
+            "content2": "",
             "image": "/static/images/saturation.jpg"
         }
+        
+        
     ]
 } 

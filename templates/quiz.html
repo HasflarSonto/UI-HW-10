@@ -74,9 +74,9 @@ $(document).ready(function() {
     $('#next-question').click(function() {
         const nextQuestion = questionNumber + 1;
         if (nextQuestion <= 5) { // Assuming 5 questions total
-            window.location.href = `/quiz/${nextQuestion}`;
+            window.location.href = "{{ url_for('quiz', question_number=1) }}".replace('1', nextQuestion);
         } else {
-            window.location.href = '/results';
+            window.location.href = "{{ url_for('results') }}";
         }
     });
 });

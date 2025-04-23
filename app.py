@@ -16,22 +16,25 @@ def home():
 @app.route('/learn/<int:lesson_number>')
 def learn(lesson_number):
 
-    # user goes into lesson
-
+    # user goes into lesson, records timestamp
     timestamps.append(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
     print(timestamps)
 
 
     # If we've completed all lessons, redirect to quiz intro
-    if lesson_number > 4:  # Assuming 4 lessons total
+    if lesson_number > 8:  
         return redirect(url_for('quiz_intro'))
     
     # Special case for exposure lesson
-    if lesson_number == 2:
-        return render_template('exposure.html')
-    
-    return render_template('learn.html', lesson_number=lesson_number)
+    if lesson_number == 4:
+        return render_template('exposure.html', lesson_number=lesson_number, photo_url="exposure.jpg")
+    elif lesson_number == 6: 
+        return render_template('hue.html', lesson_number=lesson_number, photo_url="hue.jpg")
+    elif lesson_number == 8:
+        return render_template('saturation.html', lesson_number=lesson_number, photo_url="saturation.jpg")
+    else:    
+        return render_template('learn.html', lesson_number=lesson_number)
 
 @app.route('/quiz-intro')
 def quiz_intro():

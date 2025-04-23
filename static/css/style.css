@@ -24,7 +24,7 @@ body {
 
 .nav-link.active {
     font-weight: bolder;
-    text-decoration: underline;
+
 }
 
 .dropdown-menu {

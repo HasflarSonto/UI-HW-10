@@ -32,6 +32,15 @@ $(document).ready(function() {
                 </div>`;
             }
 
+            let content2 = `
+                <div class="lesson-text">
+                    ${lesson.content2}
+                </div>
+            `;
+
+            content += content2;
+
+
             if (lesson.examples) {
                 content += `
                 <div class="examples-container mt-5">
@@ -61,8 +70,8 @@ $(document).ready(function() {
     // Next lesson button
     $('#next-lesson').click(function() {
         const nextLesson = {{ lesson_number }} + 1;
-        // If this is the last lesson (4), go to quiz intro
-        if ({{ lesson_number }} === 4) {
+   
+        if ({{ lesson_number }} === 8) {
             window.location.href = "{{ url_for('quiz_intro') }}";
         } else {
             window.location.href = `/learn/${nextLesson}`;

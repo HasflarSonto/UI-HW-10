@@ -3,25 +3,25 @@
 {% block content %}
 <div class="lesson-container text-center">
     <div class="lesson-text">
-        Adjust the exposure slider to see how the photo varies from the original.
+        Adjust the saturation slider to see how the photo's color intensity changes.
     </div>
 
-    <div class="exposure-exercise mt-5">
+    <div class="saturation-exercise mt-5">
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <div class="target-image">
-                    <img src="{{ url_for('static', filename='images/exposure.jpg') }}" alt="Target exposure" class="img-fluid">
+                    <img src="{{ url_for('static', filename='images/saturation.jpg') }}" alt="Target saturation" class="img-fluid">
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="adjustable-image">
-                    <img src="{{ url_for('static', filename='images/exposure.jpg') }}" alt="Adjustable exposure" class="img-fluid" id="adjustableImage">
+                    <img src="{{ url_for('static', filename='images/saturation.jpg') }}" alt="Adjustable saturation" class="img-fluid" id="adjustableImage">
                 </div>
             </div>
         </div>
 
         <div class="slider-container mt-4">
-            <input type="range" class="exposure-slider" id="exposureSlider" min="0" max="100" value="50">
+            <input type="range" class="saturation-slider" id="saturationSlider" min="0" max="200" value="100">
         </div>
     </div>
 
@@ -36,19 +36,17 @@
 {% block scripts %}
 <script>
 $(document).ready(function() {
-    const slider = document.getElementById('exposureSlider');
+    const slider = document.getElementById('saturationSlider');
     const image = document.getElementById('adjustableImage');
 
     slider.addEventListener('input', function() {
-        const brightness = (this.value - 50) * 2; // Convert to range -100 to 100
-        image.style.filter = `brightness(${1 + brightness/100})`;
+        // Apply saturation filter based on slider value (0-200%)
+        image.style.filter = `saturate(${this.value}%)`;
     });
-
-    const nextLesson = {{ lesson_number }} + 1;
 
     // Next lesson button
     $('#next-lesson').click(function() {
-        window.location.href = `/learn/${nextLesson}`;;
+        window.location.href = "{{ url_for('quiz', question_number=1) }}";
     });
 });
 </script>

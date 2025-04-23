@@ -3,25 +3,25 @@
 {% block content %}
 <div class="lesson-container text-center">
     <div class="lesson-text">
-        Adjust the exposure slider to see how the photo varies from the original.
+        Adjust the red hue slider to see how the photo's color temperature changes.
     </div>
 
-    <div class="exposure-exercise mt-5">
+    <div class="hue-exercise mt-5">
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <div class="target-image">
-                    <img src="{{ url_for('static', filename='images/exposure.jpg') }}" alt="Target exposure" class="img-fluid">
+                    <img src="{{ url_for('static', filename='images/hue.jpg') }}" alt="Target hue" class="img-fluid">
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="adjustable-image">
-                    <img src="{{ url_for('static', filename='images/exposure.jpg') }}" alt="Adjustable exposure" class="img-fluid" id="adjustableImage">
+                    <img src="{{ url_for('static', filename='images/hue.jpg') }}" alt="Adjustable hue" class="img-fluid" id="adjustableImage">
                 </div>
             </div>
         </div>
 
         <div class="slider-container mt-4">
-            <input type="range" class="exposure-slider" id="exposureSlider" min="0" max="100" value="50">
+            <input type="range" class="hue-slider" id="hueSlider" min="0" max="360" value="0">
         </div>
     </div>
 
@@ -36,19 +36,17 @@
 {% block scripts %}
 <script>
 $(document).ready(function() {
-    const slider = document.getElementById('exposureSlider');
+    const slider = document.getElementById('hueSlider');
     const image = document.getElementById('adjustableImage');
 
     slider.addEventListener('input', function() {
-        const brightness = (this.value - 50) * 2; // Convert to range -100 to 100
-        image.style.filter = `brightness(${1 + brightness/100})`;
+        // Apply hue-rotate filter based on slider value
+        image.style.filter = `hue-rotate(${this.value}deg)`;
     });
-
-    const nextLesson = {{ lesson_number }} + 1;
 
     // Next lesson button
     $('#next-lesson').click(function() {
-        window.location.href = `/learn/${nextLesson}`;;
+        window.location.href = "{{ url_for('learn', lesson_number=7) }}";
     });
 });
 </script>
