@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="lesson-container text-center">
+    <div id="lesson-content" class="mt-4">
+        <!-- Lesson content will be loaded dynamically -->
+    </div>
+    <div class="mt-4 text-end">
+        <button id="next-lesson" class="btn btn-next">
+            <img src="{{ url_for('static', filename='images/next-arrow.png') }}" alt="Next">
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Load lesson content
+    $.getJSON('/static/data/lessons.json', function(data) {
+        const lesson = data.lessons.find(l => l.number === {{ lesson_number }});
+        if (lesson) {
+            let content = `
+                <div class="lesson-text">
+                    ${lesson.content}
+                </div>
+            `;
+            
+            if (lesson.image) {
+                content += `<div class="lesson-image mt-4">
+                    <img src="${lesson.image}" class="img-fluid" alt="${lesson.title}">
+                </div>`;
+            }
+
+            if (lesson.examples) {
+                content += `
+                <div class="examples-container mt-5">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="good-example">Good Example</h3>
+                            <img src="${lesson.examples.good}" class="img-fluid" alt="Good example">
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="bad-example">Bad Example</h3>
+                            <img src="${lesson.examples.bad}" class="img-fluid" alt="Bad example">
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+            $('#lesson-content').html(content);
+        }
+    });
+
+    // Track progress
+    $.post('/api/progress', {
+        lesson_number: {{ lesson_number }},
+        timestamp: new Date().toISOString()
+    });
+
+    // Next lesson button
+    $('#next-lesson').click(function() {
+        const nextLesson = {{ lesson_number }} + 1;
+        // If this is the last lesson (4), go to quiz intro
+        if ({{ lesson_number }} === 4) {
+            window.location.href = "{{ url_for('quiz_intro') }}";
+        } else {
+            window.location.href = `/learn/${nextLesson}`;
+        }
+    });
+});
+</script>
+{% endblock %} 

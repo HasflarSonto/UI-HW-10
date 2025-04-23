@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="results-container text-center">
+    <h2>Quiz Results</h2>
+    <div id="results-content" class="mt-4">
+        <!-- Results will be loaded dynamically -->
+    </div>
+    <div class="mt-4">
+        <a href="/" class="btn btn-primary">Return to Home</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        // Calculate and display results
+        $.getJSON('/static/data/quiz.json', function(quizData) {
+            $.get('/api/progress', function(progressData) {
+                let correctAnswers = 0;
+                const totalQuestions = quizData.questions.length;
+                
+                progressData.forEach(progress => {
+                    if (progress.question_number) {
+                        const question = quizData.questions.find(q => q.number === progress.question_number);
+                        if (question && question.correctAnswer === progress.answer) {
+                            correctAnswers++;
+                        }
+                    }
+                });
+
+                const score = (correctAnswers / totalQuestions) * 100;
+                $('#results-content').html(`
+                    <h3>Your Score: ${score.toFixed(1)}%</h3>
+                    <p>You answered ${correctAnswers} out of ${totalQuestions} questions correctly.</p>
+                `);
+            });
+        });
+    });
+</script>
+{% endblock %} 

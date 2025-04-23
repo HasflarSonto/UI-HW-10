@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="lesson-container text-center">
+    <div class="lesson-text">
+        Adjust the exposure slider to match the output photo on the left
+    </div>
+
+    <div class="exposure-exercise mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="target-image">
+                    <img src="{{ url_for('static', filename='images/sunflower_target.jpg') }}" alt="Target exposure" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="adjustable-image">
+                    <img src="{{ url_for('static', filename='images/sunflower.jpg') }}" alt="Adjustable exposure" class="img-fluid" id="adjustableImage">
+                </div>
+            </div>
+        </div>
+
+        <div class="slider-container mt-4">
+            <input type="range" class="exposure-slider" id="exposureSlider" min="0" max="100" value="50">
+        </div>
+    </div>
+
+    <div class="mt-4 text-end">
+        <button id="next-lesson" class="btn btn-next">
+            <img src="{{ url_for('static', filename='images/next-arrow.png') }}" alt="Next">
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    const slider = document.getElementById('exposureSlider');
+    const image = document.getElementById('adjustableImage');
+
+    slider.addEventListener('input', function() {
+        const brightness = (this.value - 50) * 2; // Convert to range -100 to 100
+        image.style.filter = `brightness(${1 + brightness/100})`;
+    });
+
+    // Next lesson button
+    $('#next-lesson').click(function() {
+        window.location.href = "{{ url_for('learn', lesson_number=3) }}";
+    });
+});
+</script>
+{% endblock %} 

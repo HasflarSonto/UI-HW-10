@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="lesson-container text-center">
+    <div class="quiz-question mb-5">
+        Does this photo follow the rule of thirds?
+    </div>
+
+    <div class="quiz-image mb-5">
+        <img src="" alt="Quiz image" id="questionImage" class="img-fluid">
+    </div>
+
+    <div class="quiz-options">
+        <button class="btn btn-answer btn-no" data-answer="no">NO</button>
+        <button class="btn btn-answer btn-yes" data-answer="yes">YES</button>
+    </div>
+
+    <div class="mt-4 text-end">
+        <button id="next-question" class="btn btn-next" style="display: none;">
+            <img src="{{ url_for('static', filename='images/next-arrow.png') }}" alt="Next">
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Load quiz question
+    $.getJSON('/static/data/quiz.json', function(data) {
+        const question = data.questions.find(q => q.number === {{ question_number }});
+        if (question) {
+            $('#questionImage').attr('src', question.image);
+        }
+    });
+
+    // Handle answer selection
+    $('.btn-answer').click(function() {
+        const selectedAnswer = $(this).data('answer');
+        $('.btn-answer').prop('disabled', true);
+        
+        // Store answer
+        $.post('/api/progress', {
+            question_number: {{ question_number }},
+            answer: selectedAnswer
+        });
+
+        // Show correct/incorrect feedback
+        if (selectedAnswer === 'yes') {
+            $(this).addClass('btn-yes-selected');
+        } else {
+            $(this).addClass('btn-no-selected');
+        }
+
+        // Show next button
+        $('#next-question').show();
+    });
+
+    // Next question button
+    $('#next-question').click(function() {
+        const nextQuestion = {{ question_number }} + 1;
+        if (nextQuestion <= 5) { // Assuming 5 questions total
+            window.location.href = `/quiz/${nextQuestion}`;
+        } else {
+            window.location.href = '/results';
+        }
+    });
+});
+</script>
+{% endblock %} 

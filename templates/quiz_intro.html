@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="lesson-container text-center">
+    <div class="completion-message">
+        <h1 class="mb-4">🎉 Congratulations!</h1>
+        <p class="lead mb-5">You've completed all the photography lessons.</p>
+        
+        <div class="lessons-summary mb-5">
+            <div class="lesson-check">✓ Rule of Thirds</div>
+            <div class="lesson-check">✓ Exposure</div>
+            <div class="lesson-check">✓ Hue</div>
+            <div class="lesson-check">✓ Saturation</div>
+        </div>
+
+        <p class="quiz-intro mb-5">
+            Now, let's test your understanding with a quick quiz about composition.
+            <br>
+            You'll analyze different photos and determine if they follow the rule of thirds.
+        </p>
+
+        <button id="start-quiz" class="btn btn-begin">
+            Start Quiz
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    $('#start-quiz').click(function() {
+        window.location.href = "{{ url_for('quiz', question_number=1) }}";
+    });
+});
+</script>
+{% endblock %} 
