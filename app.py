@@ -6,6 +6,8 @@ app = Flask(__name__)
 # Simple list to store quiz answers
 quiz_answers = []
 
+timestamps = []
+
 # Routes
 @app.route('/')
 def home():
@@ -13,6 +15,14 @@ def home():
 
 @app.route('/learn/<int:lesson_number>')
 def learn(lesson_number):
+
+    # user goes into lesson
+
+    timestamps.append(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+
+    print(timestamps)
+
+
     # If we've completed all lessons, redirect to quiz intro
     if lesson_number > 4:  # Assuming 4 lessons total
         return redirect(url_for('quiz_intro'))
