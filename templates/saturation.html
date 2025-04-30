@@ -44,9 +44,10 @@ $(document).ready(function() {
         image.style.filter = `saturate(${this.value}%)`;
     });
 
-    // Next lesson button
-    $('#next-lesson').click(function() {
-        window.location.href = "{{ url_for('quiz', question_number=1) }}";
+  // Next lesson button
+  $('#next-lesson').click(function() {
+        const nextLesson = {{ lesson_number }} + 1;
+        window.location.href = `/learn/${nextLesson}`;;
     });
 });
 </script>

@@ -71,11 +71,9 @@ $(document).ready(function() {
     $('#next-lesson').click(function() {
         const nextLesson = {{ lesson_number }} + 1;
    
-        if ({{ lesson_number }} === 8) {
-            window.location.href = "{{ url_for('quiz_intro') }}";
-        } else {
-            window.location.href = `/learn/${nextLesson}`;
-        }
+
+        window.location.href = `/learn/${nextLesson}`;
+        
     });
 });
 </script>
