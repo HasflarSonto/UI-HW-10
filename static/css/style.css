@@ -4,7 +4,7 @@ body {
 }
 
 .navbar {
-    background-color: #f1f1f1;
+    background-color: #e5e4e2e0;
     border-radius: 25px;
     padding: 1rem;
     margin: 1rem auto;
@@ -17,7 +17,7 @@ body {
 
 .nav-link {
     color: #333 !important;
-    font-weight: bold;
+
     text-transform: uppercase;
     padding: 0.5rem 1rem;
 }
@@ -94,7 +94,8 @@ body {
 }
 
 .btn-begin {
-    background-color: #f1f1f1;
+    margin-top: 10rem;
+    background-color: #ADD8E6	;
     color: #333;
     border-radius: 15px;
     padding: 1rem 3rem;
