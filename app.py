@@ -22,16 +22,18 @@ def learn(lesson_number):
     print(timestamps)
 
     # If we've completed all lessons, redirect to quiz intro
-    if lesson_number > 8:
+    if lesson_number > 12:
         return redirect(url_for('quiz_intro'))
 
     # Special case for exposure lesson
-    if lesson_number == 4:
+    if lesson_number == 5:
         return render_template('exposure.html', lesson_number=lesson_number, photo_url="exposure.jpg")
-    elif lesson_number == 6:
-        return render_template('hue.html', lesson_number=lesson_number, photo_url="hue.jpg")
     elif lesson_number == 8:
+        return render_template('hue.html', lesson_number=lesson_number, photo_url="hue.jpg")
+    elif lesson_number == 11:
         return render_template('saturation.html', lesson_number=lesson_number, photo_url="saturation.jpg")
+    elif lesson_number == 3 or lesson_number == 6 or lesson_number == 9 or lesson_number == 12:
+        return render_template('tutorial.html', lesson_number=lesson_number)
     else:
         return render_template('learn.html', lesson_number=lesson_number)
 

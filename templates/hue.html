@@ -3,7 +3,7 @@
 {% block content %}
 <div class="lesson-container text-center">
     <div class="lesson-text">
-        Adjust the red hue slider to see how the photo's color temperature changes.
+        Adjust the hue slider to see how the photo's color temperature changes.
     </div>
 
     <div class="hue-exercise mt-5">
@@ -21,7 +21,7 @@
         </div>
 
         <div class="slider-container mt-4">
-            <input type="range" class="hue-slider" id="hueSlider" min="0" max="360" value="0">
+            <input type="range" class="exposure-slider" id="hueSlider" min="0" max="360" value="0">
         </div>
     </div>
 
@@ -44,10 +44,13 @@ $(document).ready(function() {
         image.style.filter = `hue-rotate(${this.value}deg)`;
     });
 
+    const nextLesson = {{ lesson_number }} + 1;
+
     // Next lesson button
     $('#next-lesson').click(function() {
-        window.location.href = "{{ url_for('learn', lesson_number=7) }}";
+        window.location.href = `/learn/${nextLesson}`;;
     });
+
 });
 </script>
 {% endblock %} 

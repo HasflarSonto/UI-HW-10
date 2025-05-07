@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="container tutorial-container py-5">
+    <div class="row align-items-center" id="tutorial-content">
+        <!-- Tutorial content will be loaded dynamically here -->
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    var lessonNumber = parseInt('{{ lesson_number }}');
+    $.getJSON('/static/data/lessons.json', function(data) {
+        var lesson = data.lessons.find(function(l) { return l.number === lessonNumber && l.type === "tutorial"; });
+        if (lesson) {
+            var stepsHtml = '';
+            if (lesson.steps && lesson.steps.length > 0) {
+                stepsHtml = '<ol class="tutorial-steps">';
+                lesson.steps.forEach(function(step) {
+                    stepsHtml += '<li>' + step + '</li>';
+                });
+                stepsHtml += '</ol>';
+            }
+            var nextLesson = lesson.number + 1;
+            var content = `
+                <div class="col-md-6 text-center mb-4 mb-md-0">
+                    <img src="${lesson.image}" alt="Tutorial Photo" class="img-fluid tutorial-image">
+                </div>
+                <div class="col-md-6 d-flex flex-column justify-content-center">
+                    <h2 class="tutorial-title mb-4">${lesson.title}</h2>
+                    ${stepsHtml}
+                </div>
+                <button class="tutorial-next-btn" onclick="window.location.href='/learn/${nextLesson}'">
+                    <img src="/static/images/next-arrow.png" alt="Next">
+                </button>
+            `;
+            $('#tutorial-content').html(content);
+        } else {
+            $('#tutorial-content').html('<div class="col-12 text-center text-danger">Tutorial not found.</div>');
+        }
+    });
+});
+</script>
+{% endblock %}

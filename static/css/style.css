@@ -233,7 +233,7 @@ body {
 
 .exposure-slider::-moz-range-track {
     width: 100%;
-    height: 10px;
+    height: 100px;
     cursor: pointer;
     background: #f1f1f1;
     border-radius: 5px;
@@ -360,4 +360,48 @@ body {
 
 .btn-begin {
     animation: pulse 2s infinite;
-} 
+}
+
+.tutorial-title {
+    font-size: 1.7rem;
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+}
+
+.tutorial-steps {
+    font-size: 1.1rem;
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+    margin-top: 1.5rem;
+}
+
+.tutorial-image {
+    max-width: 400px;
+    max-height: 600px;
+    margin: 0 auto;
+    display: block;
+}
+
+.tutorial-next-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 1000;
+    background: #add8e6;
+    border: none;
+    border-radius: 20px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.2s;
+}
+.tutorial-next-btn:hover {
+    background: #9cc7d6;
+}
+.tutorial-next-btn img {
+    width: 40px;
+    height: 40px;
+}

@@ -17,51 +17,122 @@
                 "good": "/static/images/rule_of_thirds_good.jpg",
                 "bad": "/static/images/rule_of_thirds_bad.jpg"
             }
-
         },
+
         {
             "number": 3,
+            "title": "Rule of Thirds Grid on iOS: Photos",
+            "type": "tutorial",
+            "image": "/static/images/rot_tutorial.jpg",
+           "steps": [
+                "Open the Settings app on your iPhone.",
+                "Scroll down and tap on 'Camera'.",
+                "Toggle the 'Grid' switch to ON (green).",
+                "Open the Camera app.",
+                "You’ll now see a 3x3 grid overlay — use this to align subjects according to the Rule of Thirds."
+            ]
+        },
+
+        
+
+
+
+        {
+            "number": 4,
             "content": "Changing the exposure level changes how bright or dark your photo is.",
             "content2": "Getting the right exposure means your photo isn’t too dark (underexposed) or too bright (overexposed), so details are clear and colors look natural.",
             "title": "Exposure",
             "image": "/static/images/exposure.jpg"
         },
         {
-            "number": 4,
+            "number": 5,
             "title": "Exposure",
-            "content": "Exposure determines how light or dark your image appears. It is controlled by three main settings: aperture, shutter speed, and ISO.",
+            "content": "Slide the hue slider to change the color of the image.",
             "content2": "",
             "image": "/static/images/exposure.jpg"
         },
+
+
         {
-            "number": 5,
+            "number": 6,
+            "title": "Adjusting Exposure on iOS: Photos",
+            "type": "tutorial",
+            "image": "/static/images/exposure_tutorial.gif",
+            "steps": [
+                "In Lightroom, tap Color > Mix.",
+                "Tap a color (e.g., red, blue, green).",
+                "Adjust the Hue slider to shift the tone: Red → Orange, Blue → Purple, etc.",
+                "Repeat for each color you want to shift.",
+                "Tap ✓ when done."
+            ]
+        },
+
+
+        {
+            "number": 7,
             "title": "Hue",
             "content": "Hue refers to the pure spectrum colors commonly referred to by color names - red, orange, yellow, blue, green violet - which appear in the hue circle or rainbow.",
             "content2": "",
             "image": "/static/images/hue.jpg"
         },
         {
-            "number": 6,
+            "number": 8,
             "title": "Hue",
-            "content": "hue slider",
+            "content": "Slide the hue slider to change the color of the image.",
             "content2": "",
             "image": "/static/images/hue.jpg"
         },
 
+
         {
-            "number": 7,
+            "number": 9,
+            "title": "Adjusting Hue on iOS: Adobe Lightroom",
+            "type": "tutorial",
+            "image": "/static/images/hue_tutorial.gif",
+            "steps": [
+                "In Lightroom, tap Color > Mix.",
+                "Tap a color (e.g., red, blue, green).",
+                "Adjust the Hue slider to shift the tone: Red → Orange, Blue → Purple, etc.",
+                "Repeat for each color you want to shift.",
+                "Tap ✓ when done."
+            ]
+        },
+
+
+        {
+            "number": 10,
             "title": "Saturation",
             "content": "Saturation refers to the intensity or purity of a color. A highly saturated color is vivid, while a less saturated color appears more muted or gray.",
             "content2": "",
             "image": "/static/images/saturation.jpg"
         },
+
         {
-            "number": 8,
+            "number": 11,
             "title": "Saturation",
-            "content": "slider saturation",
+            "content": "Slide the saturation slider to change the intensity of the color.",
             "content2": "",
             "image": "/static/images/saturation.jpg"
+        },
+
+
+        {
+            "number": 12,
+            "title": "Adjusting Saturation on iOS: Photos",
+            "type": "tutorial",
+            "image": "/static/images/saturation_tutorial.gif",
+            "steps": [
+                "Open the Photos app and select the photo you want to edit.",
+                "Tap 'Edit' in the top right corner.",
+                "Swipe through the adjustment tools and tap on 'Saturation'.",
+                "Drag the slider right to increase saturation or left to decrease it.",
+                "Tap 'Done' to save your edits."
+            ]
+
         }
+
+
+
         
         
     ]
