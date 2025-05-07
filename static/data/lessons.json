@@ -59,12 +59,13 @@
             "type": "tutorial",
             "image": "/static/images/exposure_tutorial.gif",
             "steps": [
-                "In Lightroom, tap Color > Mix.",
-                "Tap a color (e.g., red, blue, green).",
-                "Adjust the Hue slider to shift the tone: Red → Orange, Blue → Purple, etc.",
-                "Repeat for each color you want to shift.",
-                "Tap ✓ when done."
+                "Open the Photos app and choose the photo you want to edit.",
+                "Tap 'Edit' in the top right corner.",
+                "Swipe through the adjustment tools and tap on 'Exposure'.",
+                "Drag the slider right to brighten the photo or left to darken it.",
+                "Tap 'Done' to save your changes."
             ]
+
         },
 
 
