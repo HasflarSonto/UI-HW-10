@@ -76,11 +76,16 @@ $(document).ready(function() {
                 optionsContainer.append(col1, col2);
             } else {
                 // Create Yes/No buttons
-                const col = $('<div class="col-md-6"></div>');
-                col.append(`
-                    <button class="btn btn-answer btn-no w-100 mb-3" data-answer="no">NO</button>
-                    <button class="btn btn-answer btn-yes w-100 mb-3" data-answer="yes">YES</button>
-                `);
+                const col = $('<div class="col-md-8 align-items-center"></div>');
+                const buttonRow = $('<div class="row "></div>');
+                const yesCol = $('<div class="col-6"></div>');
+                const noCol = $('<div class="col-6"></div>');
+                
+                yesCol.append(`<button class="btn btn-answer btn-yes" data-answer="yes">YES</button>`);
+                noCol.append(`<button class="btn btn-answer btn-no" data-answer="no">NO</button>`);
+                
+                buttonRow.append(yesCol, noCol);
+                col.append(buttonRow);
                 optionsContainer.append(col);
             }
         }
