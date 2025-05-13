@@ -2,20 +2,15 @@
 
 {% block content %}
 <div class="lesson-container text-center">
-
-   
+    <div id="lesson-title"></div>
     <div id="lesson-content" class="mt-4">
         <!-- Lesson content will be loaded dynamically -->
     </div>
-    <div class="mt-4 d-flex align-items-center justify-content-between flex-wrap" id="lesson-header-row">
-        <div id="lesson-title" class="mb-0"></div>
-        <button id="next-lesson" class="btn btn-next ms-3">
+    <div class="mt-4 text-end">
+        <button id="next-lesson" class="btn btn-next">
             <img src="{{ url_for('static', filename='images/next-arrow.png') }}" alt="Next">
         </button>
     </div>
-
-    
-
 </div>
 {% endblock %}
 
@@ -65,10 +60,8 @@ $(document).ready(function() {
 
             $('#lesson-content').html(content);
 
-
-
-            // $("#lesson-title").html(lesson.title);
-            $("#lesson-title").html("");
+            // Set the lesson title
+            $("#lesson-title").html(lesson.title);
         }
     });
 

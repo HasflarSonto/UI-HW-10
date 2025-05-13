@@ -105,7 +105,14 @@ $(document).ready(function() {
     // Handle answer selection
     $(document).on('click', '.btn-answer', function() {
         const selectedAnswer = $(this).data('answer');
-        $('.btn-answer').prop('disabled', true);
+        
+        // Remove selected state from all buttons
+        $('.btn-answer').removeClass('btn-yes-selected btn-no-selected btn-selected');
+        
+        // Add selected state to clicked button
+        $(this).addClass(selectedAnswer === 'yes' ? 'btn-yes-selected' : 
+                        selectedAnswer === 'no' ? 'btn-no-selected' : 
+                        'btn-selected');
         
         // Store answer via JSON POST
         $.ajax({
@@ -124,18 +131,15 @@ $(document).ready(function() {
             }
         });
 
-        // Show selected answer feedback
-        $('.btn-answer').removeClass('btn-yes-selected btn-no-selected btn-selected');
-        $(this).addClass(selectedAnswer === 'yes' ? 'btn-yes-selected' : 
-                        selectedAnswer === 'no' ? 'btn-no-selected' : 
-                        'btn-selected');
-
         // Show next button
         $('#next-question').show();
     });
 
     // Next question button
     $('#next-question').click(function() {
+        // Disable all answer buttons when moving to next question
+        $('.btn-answer').prop('disabled', true);
+        
         const nextQuestion = questionNumber + 1;
         if (nextQuestion <= 7) { 
             window.location.href = "{{ url_for('quiz', question_number=1) }}".replace('1', nextQuestion);

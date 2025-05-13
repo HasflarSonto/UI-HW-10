@@ -57,17 +57,22 @@ body {
 }
 
 #lesson-title {
-    font-size: 0.8rem;
-    font-style: italic;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
     margin-bottom: 2rem;
     text-align: center;
-    margin-left: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0.5rem 1rem;
+    border-bottom: 2px solid #add8e6;
+    display: inline-block;
 }
 
 .lesson-container img, .quiz-container img {
-    max-width: 100%;
+    max-width: 70%;
     height: auto;
     margin: 1rem 0;
+    vertical-align: center;
 }
 
 .options {
@@ -279,7 +284,8 @@ body {
     border: none;
     transition: all 0.3s ease;
     text-align: center;
-  
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-no {
@@ -297,27 +303,50 @@ body {
 .btn-no:hover {
     background-color: #ff5252;
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .btn-yes:hover {
     background-color: #51cf66;
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .btn-no-selected {
     background-color: #ff5252;
     color: white;
-    opacity: 0.8;
+    transform: scale(1.05);
+    box-shadow: 0 0 0 3px #ff6b6b, 0 4px 8px rgba(0,0,0,0.2);
+    animation: pulse 0.5s ease-in-out;
 }
 
 .btn-yes-selected {
     background-color: #51cf66;
     color: white;
-    opacity: 0.8;
+    transform: scale(1.05);
+    box-shadow: 0 0 0 3px #69db7c, 0 4px 8px rgba(0,0,0,0.2);
+    animation: pulse 0.5s ease-in-out;
+}
+
+.btn-selected {
+    background-color: #4dabf7;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 0 0 3px #74c0fc, 0 4px 8px rgba(0,0,0,0.2);
+    animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1.05); }
 }
 
 .btn-answer:disabled {
     cursor: not-allowed;
+    opacity: 0.7;
 }
 
 /* Quiz Transition Page */
@@ -374,6 +403,7 @@ body {
     font-size: 1.7rem;
     font-family: 'Montserrat', sans-serif;
     text-align: left;
+    color: #333;
 }
 
 .tutorial-steps {
@@ -381,13 +411,55 @@ body {
     font-family: 'Montserrat', sans-serif;
     text-align: left;
     margin-top: 1.5rem;
+    padding-left: 1.2rem;
+}
+
+.tutorial-steps li {
+    margin-bottom: 1rem;
+    line-height: 1.4;
 }
 
 .tutorial-image {
-    max-width: 400px;
-    max-height: 600px;
-    margin: 0 auto;
-    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .tutorial-title {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+    
+    .tutorial-steps {
+        font-size: 1rem;
+        text-align: left;
+        padding-left: 1rem;
+    }
+    
+    .tutorial-steps li {
+        margin-bottom: 0.8rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    #lesson-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
 }
 
 .tutorial-next-btn {
@@ -412,4 +484,41 @@ body {
 .tutorial-next-btn img {
     width: 40px;
     height: 40px;
+}
+
+/* Make iOS tutorial images for Exposure and Hue smaller */
+body.exposure-tutorial .lesson-container,
+body.hue-tutorial .lesson-container {
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+body.exposure-tutorial .tutorial-image,
+body.hue-tutorial .tutorial-image {
+    max-width: 60px !important;
+    max-height: 60px !important;
+    height: auto;
+    width: auto;
+    margin: 0 auto;
+    display: block;
+    object-fit: contain;
+}
+
+@media (max-width: 600px) {
+    body.exposure-tutorial .lesson-container,
+    body.hue-tutorial .lesson-container {
+        max-width: 98vw;
+        padding: 1rem;
+    }
+    body.exposure-tutorial .tutorial-image,
+    body.hue-tutorial .tutorial-image {
+        max-height: 160px;
+    }
+}
+
+.rot-tutorial-img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    margin: 1rem auto;
 }

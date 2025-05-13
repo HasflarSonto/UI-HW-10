@@ -2,9 +2,15 @@
 
 
 {% block content %}
-<div class="container tutorial-container py-5">
-    <div class="row align-items-center" id="tutorial-content">
+<div class="lesson-container text-center">
+    <div id="lesson-title"></div>
+    <div id="tutorial-content">
         <!-- Tutorial content will be loaded dynamically here -->
+    </div>
+    <div class="mt-4 text-end">
+        <button id="next-lesson" class="btn btn-next">
+            <img src="{{ url_for('static', filename='images/next-arrow.png') }}" alt="Next">
+        </button>
     </div>
 </div>
 {% endblock %}
@@ -17,6 +23,8 @@ $(document).ready(function() {
     $.getJSON('/static/data/lessons.json', function(data) {
         var lesson = data.lessons.find(function(l) { return l.number === lessonNumber && l.type === "tutorial"; });
         if (lesson) {
+            // Set the lesson title
+            $('#lesson-title').text(lesson.title);
             var stepsHtml = '';
             if (lesson.steps && lesson.steps.length > 0) {
                 stepsHtml = '<ol class="tutorial-steps">';
@@ -27,21 +35,35 @@ $(document).ready(function() {
             }
             var nextLesson = lesson.number + 1;
             var content = `
-                <div class="col-md-6 text-center mb-4 mb-md-0">
-                    <img src="${lesson.image}" alt="Tutorial Photo" class="img-fluid tutorial-image">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h2 class="tutorial-title mb-4">${lesson.title}</h2>
+                                ${stepsHtml}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <img src="${lesson.image}" alt="Tutorial Photo" class="img-fluid tutorial-image${lesson.image.includes('rot_tutorial.jpg') ? ' rot-tutorial-img' : ''}">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex flex-column justify-content-center">
-                    <h2 class="tutorial-title mb-4">${lesson.title}</h2>
-                    ${stepsHtml}
-                </div>
-                <button class="tutorial-next-btn" onclick="window.location.href='/learn/${nextLesson}'">
-                    <img src="/static/images/next-arrow.png" alt="Next">
-                </button>
             `;
             $('#tutorial-content').html(content);
         } else {
+            $('#lesson-title').text('');
             $('#tutorial-content').html('<div class="col-12 text-center text-danger">Tutorial not found.</div>');
         }
+    });
+
+    // Next lesson button
+    $('#next-lesson').click(function() {
+        const nextLesson = {{ lesson_number }} + 1;
+        window.location.href = `/learn/${nextLesson}`;
     });
 });
 </script>
